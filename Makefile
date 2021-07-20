@@ -1,4 +1,4 @@
-.DEFAULTGOAL: clean
+.DEFAULT_GOAL: clean
 
 fib_lib.o: fib_lib.c fib_lib.h
 	gcc -c fib_lib.c
