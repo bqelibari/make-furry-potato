@@ -1,10 +1,13 @@
+include inc_test1 inc_test2
+
 .DEFAULT_GOAL: clean
+.PHONY: clean
+
 c_sources= fib_lib.c fib_fast.c
 c_objects= fib_lib.o fib_fast.o
 
 all: 
-	$(c_objects): $(c_sources) fib_lib.h
-	gcc -c $< -o $@
+	@echo hello
 
 clean:
 	rm -f *.o
