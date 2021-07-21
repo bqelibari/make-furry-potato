@@ -3,7 +3,7 @@
 c_objects := $(patsubst %.c,%.o,$(wildcard *.c))
 fib_fast_objects := $(filter-out fib_slow.o, $(c_objects))
 fib_slow_objects := $(filter-out fib_fast.o, $(c_objects))
-all: fib_fast fib_slow
+all: objects fib_fast fib_slow
 
 objects: $(c_objects)
 
