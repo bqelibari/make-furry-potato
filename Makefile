@@ -1,19 +1,40 @@
-.DEFAULT_GOAL: clean
+# PATHS ##############################################
+basedir:= $(shell pwd)
+pathfs := fib_slow_dir
+pathff := fib_fast_dir
+patho := objects
+pathb := build
+pathh := headers
 
-c_objects := $(patsubst %.c,%.o,$(wildcard *.c))
-fib_fast_objects := $(filter-out fib_slow.o, $(c_objects))
-fib_slow_objects := $(filter-out fib_fast.o, $(c_objects))
-vpath *.c ./fib_fast_dir ./fib_slow_dir
+# SOURCES ############################################
+srcs := fib_lib.c fib_fast.c fib_slow.c
+headers := fib_lib.h
 
-all: objects fib_fast fib_slow
+# OBJECTS ############################################
+obj := $(addprefix $(patho)/, $(patsubst %.c,%.o,$(srcs)))
+fib_fast_objects := $(filter-out %_slow.o, $(obj))
+fib_slow_objects := $(filter-out %_fast.o, $(obj))
 
-objects: $(c_objects)
+# OUTPUT FILES #######################################
+fib_fast := $(pathb)/fib_fast
+fib_slow := $(pathb)/fib_slow
 
-fib_fast: $(fib_fast_objects)
+vpath %.c $(pathff)/ $(pathfs)/
+vpath %.o $(patho)/
+
+all:$(fib_fast) $(fib_slow)
+
+$(patho):
+	mkdir -p $@
+
+$(patho)/%.o: %.c | $(patho)
+	gcc -c $< -o $@
+
+$(fib_fast): $(fib_fast_objects)
 	gcc -o $@ $(fib_fast_objects)
 
-fib_slow: $(fib_slow_objects)
+$(fib_slow): $(fib_slow_objects)
 	gcc -o $@ $(fib_slow_objects)
-
+	
 clean:
-	rm -f *.o fib_fast fib_slow
+	rm -fr $(patho)

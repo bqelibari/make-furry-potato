@@ -1,4 +1,4 @@
-#include "fib_lib.h"
+#include "./headers/fib_lib.h"
 #include "stdio.h"
 
 int fib_slow(int n) {
