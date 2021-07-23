@@ -30,15 +30,16 @@ all:$(fib_fast) $(fib_slow)
 $(patho):
 	mkdir -p $@
 
-$(patho)/%.o: %.c | $(patho)
+$(pathb):
+	mkdir -p $@
+
+$(patho)/%.o: %.c $(patho)
 	gcc -c $< -o $@
 
-$(fib_fast): $(fib_fast_objects)
-	mkdir -p $(pathb)
+$(fib_fast): $(fib_fast_objects) $(pathb)
 	gcc -o $@ $(fib_fast_objects)
 
-$(fib_slow): $(fib_slow_objects)
-	mkdir -p $(pathb)
+$(fib_slow): $(fib_slow_objects) $(pathb)
 	gcc -o $@ $(fib_slow_objects)
 	
 clean:
