@@ -19,9 +19,12 @@ fib_slow_objects := $(filter-out %_fast.o, $(obj))
 fib_fast := $(pathb)/fib_fast
 fib_slow := $(pathb)/fib_slow
 
+# VPATH DIRECTIVES ###################################
 vpath %.c $(pathff)/ $(pathfs)/
 vpath %.o $(patho)/
+vpath %.h $(pathh)/
 
+######################################################
 all:$(fib_fast) $(fib_slow)
 
 $(patho):
@@ -31,10 +34,12 @@ $(patho)/%.o: %.c | $(patho)
 	gcc -c $< -o $@
 
 $(fib_fast): $(fib_fast_objects)
+	mkdir -p $(pathb)
 	gcc -o $@ $(fib_fast_objects)
 
 $(fib_slow): $(fib_slow_objects)
+	mkdir -p $(pathb)
 	gcc -o $@ $(fib_slow_objects)
 	
 clean:
-	rm -fr $(patho)
+	rm -fr $(patho) $(pathb)
