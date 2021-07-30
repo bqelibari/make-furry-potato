@@ -1,0 +1,10 @@
+foo := foo
+bar = bar
+
+undefine foo
+undefine bar
+
+all:
+
+	$(info $(origin foo))
+	$(info $(flavor bar))
