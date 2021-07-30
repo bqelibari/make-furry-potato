@@ -1,0 +1,13 @@
+foo ?= hello
+
+#equals
+
+ifeq($(origin FOO), undefined)
+FOO = hello
+endif
+
+a = 5
+#...
+#...
+a ?= hello
+#does nothing because a had its value already set.
