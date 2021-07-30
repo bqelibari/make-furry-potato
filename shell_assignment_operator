@@ -1,0 +1,6 @@
+pwd != pwd
+c_files != find . -name '*.c'
+
+all:
+	@echo $(pwd)
+	@echo $(c_files)
