@@ -1,0 +1,8 @@
+obj = prog.o foo.o instance.o
+prog: $(obj)
+	gcc -o program $(obj) #textual substitution of obj.
+
+
+random_path := rpath
+
+$(random_path)/%.o: $(patsubst %.o, %.c, $(obj))

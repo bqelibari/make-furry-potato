@@ -1,0 +1,16 @@
+#not expanded during read in phase,
+#expansion occurs during first usage instead.
+foo = $(bar)
+bar = $(baz)
+baz = Hello
+#disadvantages may be infinite recursive expansion loops
+#functions will be executed every time the variable is used.
+
+#:= and ::=(POSIX) define simply expanded variables.
+#those vars are expanded immediately
+
+foo := hello
+bar := $(foo) there
+foo := bye
+#makes compilcated makefiles more predictable
+#much like variables in programming languages

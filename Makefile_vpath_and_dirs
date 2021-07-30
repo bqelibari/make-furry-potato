@@ -1,3 +1,4 @@
+.ONESHELL:
 # PATHS ##############################################
 basedir:= $(shell pwd)
 pathfs := fib_slow_dir
@@ -26,21 +27,25 @@ vpath %.h $(pathh)/
 
 ######################################################
 all:$(fib_fast) $(fib_slow)
+test:
+	cd ..
+	pwd
+	
 
 $(patho):
-	mkdir -p $@
+	-mkdir $@
 
 $(pathb):
-	mkdir -p $@
+	-mkdir $@
 
-$(patho)/%.o: %.c $(patho)
+$(patho)/%.o: %.c | $(patho)
 	gcc -c $< -o $@
 
-$(fib_fast): $(fib_fast_objects) $(pathb)
+$(fib_fast): $(fib_fast_objects) | $(pathb)
 	gcc -o $@ $(fib_fast_objects)
 
-$(fib_slow): $(fib_slow_objects) $(pathb)
+$(fib_slow): $(fib_slow_objects) | $(pathb)
 	gcc -o $@ $(fib_slow_objects)
 	
 clean:
-	rm -fr $(patho) $(pathb)
+	-rm -fr $(patho) $(pathb)
