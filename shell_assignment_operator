@@ -1,6 +1,16 @@
 pwd != pwd
 c_files != find . -name '*.c'
 
+#equals
+
+pwd2 := $(shell pwd)
+c_files2 := $(shell find . -name '*.c')
+
+#while the assign operator may produce unwanted $,
+#the second method is safer as the value is simply expanded
+
 all:
-	@echo $(pwd)
-	@echo $(c_files)
+	@echo !=: $(pwd)
+	@echo !=: $(c_files)
+	@echo := $(pwd)
+	@echo := $(c_files)
