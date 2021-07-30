@@ -1,0 +1,4 @@
+srcs = hi.py bye.py nice.py
+srcs += dye.py
+
+#output equals hi.py bye.py nice.py dye.py
