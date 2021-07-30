@@ -1,0 +1,5 @@
+foo := a.o b.o l.a c.o
+bar := $(foo:.o=.c)
+#outputs a.c b.c l.a c.c
+#$(foo:.o=.c) equals $(patsubst %o,%c, var)
+#$(foo: %.o=%.c) == $(patsubst o,c,$(var))
