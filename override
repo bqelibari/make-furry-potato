@@ -1,0 +1,11 @@
+all:
+	@echo $(foo)
+
+#override foo:= bye
+#foo = bye
+#foo := 3
+
+test:	
+	@echo $(foo)
+
+# command: make --file=override all test foo=hello
