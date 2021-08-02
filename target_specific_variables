@@ -1,0 +1,18 @@
+.PHONY: all foo bar baz
+
+VAR = global scope
+
+all: first second third
+	@echo In $@ VAR is $(VAR)
+
+first:
+	@echo In $@ VAR is $(VAR)
+
+second: VAR = local scope
+#specify in which target-context the variable VAR has the value its been assigned
+
+second: third
+	@echo In $@ VAR is $(VAR)
+
+third:
+	@echo In $@ VAR is $(VAR)
